@@ -2,7 +2,8 @@ color R = color(255,0,0);
 color B = color(0,0,255);
 int LIFE = 3;
 int SCORE = 0;
-float VELOCITY = 2;
+int SCORE_CONTROL = 0;
+float VELOCITY = 1.5;
 boolean STATUS_GAME = false;
 boolean WIN = false;
 boolean LOST = false;
@@ -79,7 +80,7 @@ boolean life3_status = false;
 float playerX = 50; //50
 float playerY = 150; //150
 float playerSize = 40;
-float playerVelocity = 2;
+float playerVelocity = 1.5;
 
 
 
@@ -108,6 +109,7 @@ void game(){
   image(life_image, 200, 20);
   text(": "+LIFE, 227, 40);
   text("Pontos: "+SCORE, 20, 80);
+  text("Velocidade: "+VELOCITY, 227, 80);
   
   // Fundo do jogo
   fill(255,255,255);
@@ -136,9 +138,7 @@ void game(){
   
   // Conjunto de objectos movendo-se
   SCREEN_GAME = SCREEN_GAME - VELOCITY;
-  if(SCREEN_GAME+SCREEN_TOTAL <= 0){
-    SCREEN_GAME = 0;
-  }
+  
   translate(SCREEN_GAME, 100);
   fill(255, 255, 255);
   rect(0, 0, SCREEN_TOTAL, height-200);
@@ -193,8 +193,7 @@ void game(){
   playerX = playerX + playerVelocity;
   
   if(playerX >= SCREEN_TOTAL){
-    playerX = 0;
-    playerY = 150;
+    playerVelocity = 10;
   }
   
   translate(playerX, playerY);
@@ -218,7 +217,6 @@ void game(){
     fill(255,0,0);
     ellipse(0, 0, playerSize, playerSize);
     LIFE--;
-    //stop();
     SCREEN_GAME = 0;
     playerX = 50;
     playerY = 150;
@@ -227,7 +225,6 @@ void game(){
     fill(255,0,0);
     ellipse(0, 0, playerSize, playerSize);
     LIFE--;
-    //stop();
     SCREEN_GAME = 0;
     playerX = 50;
     playerY = 150;
@@ -236,7 +233,6 @@ void game(){
     fill(255,0,0);
     ellipse(0, 0, playerSize, playerSize);
     LIFE--;
-    //stop();
     SCREEN_GAME = 0;
     playerX = 50;
     playerY = 150;
@@ -245,7 +241,6 @@ void game(){
     fill(255,0,0);
     ellipse(0, 0, playerSize, playerSize);
     LIFE--;
-    //stop();
     SCREEN_GAME = 0;
     playerX = 50;
     playerY = 150;
@@ -254,7 +249,6 @@ void game(){
     fill(255,0,0);
     ellipse(0, 0, playerSize, playerSize);
     LIFE--;
-    //stop();
     SCREEN_GAME = 0;
     playerX = 50;
     playerY = 150;
@@ -263,7 +257,6 @@ void game(){
     fill(255,0,0);
     ellipse(0, 0, playerSize, playerSize);
     LIFE--;
-    //stop();
     SCREEN_GAME = 0;
     playerX = 50;
     playerY = 150;
@@ -272,7 +265,6 @@ void game(){
     fill(255,0,0);
     ellipse(0, 0, playerSize, playerSize);
     LIFE--;
-    //stop();
     SCREEN_GAME = 0;
     playerX = 50;
     playerY = 150;
@@ -281,7 +273,6 @@ void game(){
     fill(255,0,0);
     ellipse(0, 0, playerSize, playerSize);
     LIFE--;
-    //stop();
     SCREEN_GAME = 0;
     playerX = 50;
     playerY = 150;
@@ -290,7 +281,6 @@ void game(){
     fill(255,0,0);
     ellipse(0, 0, playerSize, playerSize);
     LIFE--;
-    //stop();
     SCREEN_GAME = 0;
     playerX = 50;
     playerY = 150;
@@ -299,7 +289,6 @@ void game(){
     fill(255,0,0);
     ellipse(0, 0, playerSize, playerSize);
     LIFE--;
-    //stop();
     SCREEN_GAME = 0;
     playerX = 50;
     playerY = 150;
@@ -308,7 +297,6 @@ void game(){
     fill(255,0,0);
     ellipse(0, 0, playerSize, playerSize);
     LIFE--;
-    //stop();
     SCREEN_GAME = 0;
     playerX = 50;
     playerY = 150;
@@ -317,7 +305,6 @@ void game(){
     fill(255,0,0);
     ellipse(0, 0, playerSize, playerSize);
     LIFE--;
-    //stop();
     SCREEN_GAME = 0;
     playerX = 50;
     playerY = 150;
@@ -326,7 +313,6 @@ void game(){
     fill(255,0,0);
     ellipse(0, 0, playerSize, playerSize);
     LIFE--;
-    //stop();
     SCREEN_GAME = 0;
     playerX = 50;
     playerY = 150;
@@ -335,7 +321,6 @@ void game(){
     fill(255,0,0);
     ellipse(0, 0, playerSize, playerSize);
     LIFE--;
-    //stop();
     SCREEN_GAME = 0;
     playerX = 50;
     playerY = 150;
@@ -344,7 +329,6 @@ void game(){
     fill(255,0,0);
     ellipse(0, 0, playerSize, playerSize);
     LIFE--;
-    //stop();
     SCREEN_GAME = 0;
     playerX = 50;
     playerY = 150;
@@ -353,7 +337,6 @@ void game(){
     fill(255,0,0);
     ellipse(0, 0, playerSize, playerSize);
     LIFE--;
-    //stop();
     SCREEN_GAME = 0;
     playerX = 50;
     playerY = 150;
@@ -362,7 +345,6 @@ void game(){
     fill(255,0,0);
     ellipse(0, 0, playerSize, playerSize);
     LIFE--;
-    //stop();
     SCREEN_GAME = 0;
     playerX = 50;
     playerY = 150;
@@ -371,7 +353,6 @@ void game(){
     fill(255,0,0);
     ellipse(0, 0, playerSize, playerSize);
     LIFE--;
-    //stop();
     SCREEN_GAME = 0;
     playerX = 50;
     playerY = 150;
@@ -380,7 +361,6 @@ void game(){
     fill(255,0,0);
     ellipse(0, 0, playerSize, playerSize);
     LIFE--;
-    //stop();
     SCREEN_GAME = 0;
     playerX = 50;
     playerY = 150;
@@ -389,7 +369,6 @@ void game(){
     fill(255,0,0);
     ellipse(0, 0, playerSize, playerSize);
     LIFE--;
-    //stop();
     SCREEN_GAME = 0;
     playerX = 50;
     playerY = 150;
@@ -398,7 +377,6 @@ void game(){
     fill(255,0,0);
     ellipse(0, 0, playerSize, playerSize);
     LIFE--;
-    //stop();
     SCREEN_GAME = 0;
     playerX = 50;
     playerY = 150;
@@ -407,7 +385,6 @@ void game(){
     fill(255,0,0);
     ellipse(0, 0, playerSize, playerSize);
     LIFE--;
-    //stop();
     SCREEN_GAME = 0;
     playerX = 50;
     playerY = 150;
@@ -416,7 +393,6 @@ void game(){
     fill(255,0,0);
     ellipse(0, 0, playerSize, playerSize);
     LIFE--;
-    //stop();
     SCREEN_GAME = 0;
     playerX = 50;
     playerY = 150;
@@ -425,7 +401,6 @@ void game(){
     fill(255,0,0);
     ellipse(0, 0, playerSize, playerSize);
     LIFE--;
-    //stop();
     SCREEN_GAME = 0;
     playerX = 50;
     playerY = 150;
@@ -460,102 +435,134 @@ void game(){
   if(playerX-(playerSize/2) > obstacle1+100+1 && !obstacle1_status){
     SCORE = SCORE + 10;
     obstacle1_status = true;
+    SCORE_CONTROL++;
   }
   if(playerX-(playerSize/2) > obstacle2+100+1 && !obstacle2_status){
     SCORE = SCORE + 10;
     obstacle2_status = true;
+    SCORE_CONTROL++;
   }
   if(playerX-(playerSize/2) > obstacle3+100+1 && !obstacle3_status){
     SCORE = SCORE + 10;
     obstacle3_status = true;
+    SCORE_CONTROL++;
   }
   if(playerX-(playerSize/2) > obstacle4+100+1 && !obstacle4_status){
     SCORE = SCORE + 10;
     obstacle4_status = true;
+    SCORE_CONTROL++;
   }
   if(playerX-(playerSize/2) > obstacle5+100+1 && !obstacle5_status){
     SCORE = SCORE + 10;
     obstacle5_status = true;
+    SCORE_CONTROL++;
   }
   if(playerX-(playerSize/2) > obstacle6+100+1 && !obstacle6_status){
     SCORE = SCORE + 10;
     obstacle6_status = true;
+    SCORE_CONTROL++;
   }
   if(playerX-(playerSize/2) > obstacle7+100+1 && !obstacle7_status){
     SCORE = SCORE + 10;
     obstacle7_status = true;
+    SCORE_CONTROL++;
   }
   if(playerX-(playerSize/2) > obstacle8+100+1 && !obstacle8_status){
     SCORE = SCORE + 10;
     obstacle8_status = true;
+    SCORE_CONTROL++;
   }
   if(playerX-(playerSize/2) > obstacle9+100+1 && !obstacle9_status){
     SCORE = SCORE + 10;
     obstacle9_status = true;
+    SCORE_CONTROL++;
   }
   if(playerX-(playerSize/2) > obstacle10+100+1 && !obstacle10_status){
     SCORE = SCORE + 10;
     obstacle10_status = true;
+    SCORE_CONTROL++;
   }
   if(playerX-(playerSize/2) > obstacle11+100+1 && !obstacle11_status){
     SCORE = SCORE + 10;
     obstacle11_status = true;
+    SCORE_CONTROL++;
   }
   if(playerX-(playerSize/2) > obstacle12+100+1 && !obstacle12_status){
     SCORE = SCORE + 10;
     obstacle12_status = true;
+    SCORE_CONTROL++;
   }
   if(playerX-(playerSize/2) > obstacle13+100+1 && !obstacle13_status){
     SCORE = SCORE + 10;
     obstacle13_status = true;
+    SCORE_CONTROL++;
   }
   if(playerX-(playerSize/2) > obstacle14+100+1 && !obstacle14_status){
     SCORE = SCORE + 10;
     obstacle14_status = true;
+    SCORE_CONTROL++;
   }
   if(playerX-(playerSize/2) > obstacle15+100+1 && !obstacle15_status){
     SCORE = SCORE + 10;
     obstacle15_status = true;
+    SCORE_CONTROL++;
   }
   if(playerX-(playerSize/2) > obstacle16+100+1 && !obstacle16_status){
     SCORE = SCORE + 10;
     obstacle16_status = true;
+    SCORE_CONTROL++;
   }
   if(playerX-(playerSize/2) > obstacle17+100+1 && !obstacle17_status){
     SCORE = SCORE + 10;
     obstacle17_status = true;
+    SCORE_CONTROL++;
   }
   if(playerX-(playerSize/2) > obstacle18+100+1 && !obstacle18_status){
     SCORE = SCORE + 10;
     obstacle18_status = true;
+    SCORE_CONTROL++;
   }
   if(playerX-(playerSize/2) > obstacle19+100+1 && !obstacle19_status){
     SCORE = SCORE + 10;
     obstacle19_status = true;
+    SCORE_CONTROL++;
   }
   if(playerX-(playerSize/2) > obstacle20+100+1 && !obstacle20_status){
     SCORE = SCORE + 10;
     obstacle20_status = true;
+    SCORE_CONTROL++;
   }
   if(playerX-(playerSize/2) > obstacle21+100+1 && !obstacle21_status){
     SCORE = SCORE + 10;
     obstacle21_status = true;
+    SCORE_CONTROL++;
   }
   if(playerX-(playerSize/2) > obstacle22+100+1 && !obstacle22_status){
     SCORE = SCORE + 10;
     obstacle22_status = true;
+    SCORE_CONTROL++;
   }
   if(playerX-(playerSize/2) > obstacle23+100+1 && !obstacle23_status){
     SCORE = SCORE + 10;
     obstacle23_status = true;
+    SCORE_CONTROL++;
   }
   if(playerX-(playerSize/2) > obstacle24+100+1 && !obstacle24_status){
     SCORE = SCORE + 10;
     obstacle24_status = true;
+    SCORE_CONTROL++;
   }
   if(playerX-(playerSize/2) > obstacle25+100+1 && !obstacle25_status){
     SCORE = SCORE + 10;
     obstacle25_status = true;
+    SCORE_CONTROL++;
+  }
+  
+  
+  if(SCORE % 100 == 0 && SCORE != 0 && SCORE_CONTROL == 10){
+    VELOCITY = VELOCITY*2;
+    playerVelocity = playerVelocity*2;
+    SCORE_CONTROL = 0;
   }
 }
 
@@ -564,15 +571,24 @@ void game(){
   WIN GAME
 *************************/
 
-void win(){
-  {
-    STATUS_GAME = true;
-    background(0,0,200);
-    textSize(40);
-    fill(255);
-    text("Parabéns!", 100, height/2);
-    textSize(20);
-    text("Pressione a tecla 'v' para voltar ao menu principal.", 100, (height/2)+50);
+void win()
+{
+  background(0,0,200);
+  textSize(40);
+  fill(255);
+  text("Parabéns!", 100, height/2);
+  textSize(20);
+  text("Pressione a tecla 'v' para voltar ao menu principal.", 100, (height/2)+50);
+  if(keyPressed && (key == 'v' || key == 'V')){
+    SCREEN_GAME = 0;
+    playerX = 50;
+    playerY = 150;
+    LIFE = 3;
+    SCORE = 0;
+    life1_status = false;
+    life2_status = false;
+    life3_status = false;
+    WIN = false;
   }
 }
 
@@ -581,7 +597,7 @@ void win(){
   END GAME
 *************************/
 
-void end()
+void lost()
 {
   background(200,0,0);
   textSize(40);
@@ -618,7 +634,7 @@ void draw()
   textSize(20);
   text("Pressione a tecla 's' para iniciar o jogo.", 100, (height/2)+50);
   
-  if(keyPressed && (key == 's' || key == 'S') && !STATUS_GAME && !LOST){
+  if(keyPressed && (key == 's' || key == 'S') && !STATUS_GAME && !LOST && !WIN){
     STATUS_GAME = true;
   }
   
@@ -627,9 +643,15 @@ void draw()
   }
   
   if(LIFE == 0){
-    LOST = true;
     STATUS_GAME = false;
-    end();
+    LOST = true;
+    lost();
+  }
+  
+  if(SCREEN_GAME+SCREEN_TOTAL <= 0){
+    STATUS_GAME = false;
+    LOST = true;
+    win();
   }
   
 }
