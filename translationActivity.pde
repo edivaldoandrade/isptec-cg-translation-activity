@@ -1,6 +1,7 @@
 color R = color(255,0,0);
 color B = color(0,0,255);
 int LIFE = 3;
+int SCORE = 0;
 float VELOCITY = 2;
 boolean STATUS_GAME = false;
 boolean WIN = false;
@@ -13,15 +14,18 @@ float position1 = 0;
 float position2 = 100;
 float position3 = 200;
 
-float obstacle1 = 300;
-float obstacle2 = 400;
-float obstacle3 = 600;
+float obstacle1 = 500;
+float obstacle2 = 800;
+float obstacle3 = 1200;
+boolean obstacle1_status = false;
+boolean obstacle2_status = false;
+boolean obstacle3_status = false;
 
-float life1 = 700;
+float life1 = 1800;
+float life2 = 1500;
+float life3 = 900;
 boolean life1_status = false;
-float life2 = 500;
 boolean life2_status = false;
-float life3 = 200;
 boolean life3_status = false;
 
 
@@ -59,6 +63,7 @@ void game(){
   text("Nível: 1", 20, 40);
   image(life_image, 200, 20);
   text(": "+LIFE, 227, 40);
+  text("Pontos: "+SCORE, 20, 80);
   
   // Fundo do jogo
   fill(255,255,255);
@@ -73,11 +78,14 @@ void game(){
           playerY = playerY+10;
       }
     }
-    /*if(keyCode==38 && (playerY == position2+50 || playerY == position3+50)){
+    /*
+    delay(100);
+    if(keyCode==UP && (playerY == position2+50 || playerY == position3+50)){
         playerY = playerY-100;
-    }else if(keyCode==40 && (playerY == position1+50 || playerY == position2+50)){
+    }else if(keyCode==DOWN && (playerY == position1+50 || playerY == position2+50)){
         playerY = playerY+100;
-    }*/
+    }
+    */
   }
   
   
@@ -178,6 +186,21 @@ void game(){
     LIFE++;
     life3_status = true;
   }
+  
+  
+  // SCORE
+  if(playerX-(playerSize/2) > obstacle1+100+1 && !obstacle1_status){
+    SCORE = SCORE + 10;
+    obstacle1_status = true;
+  }
+  if(playerX-(playerSize/2) > obstacle2+100+1 && !obstacle2_status){
+    SCORE = SCORE + 10;
+    obstacle2_status = true;
+  }
+  if(playerX-(playerSize/2) > obstacle3+100+1 && !obstacle3_status){
+    SCORE = SCORE + 10;
+    obstacle3_status = true;
+  }
 }
 
 
@@ -185,16 +208,15 @@ void game(){
   WIN GAME
 *************************/
 
-void winGame(){
+void win(){
   {
     STATUS_GAME = true;
-    background(255,255,255);
-    fill(0);
-    textSize(50);
-    text("Você venceu!", 200, 350);
-    fill(255,0,0);
-    textSize(30);
-    text("Pressione a tecla 'r' para reiniciar o jogo", 100, 400);
+    background(0,0,200);
+    textSize(40);
+    fill(255);
+    text("Parabéns!", 100, height/2);
+    textSize(20);
+    text("Pressione a tecla 'v' para voltar ao menu principal.", 100, (height/2)+50);
   }
 }
 
@@ -203,16 +225,17 @@ void winGame(){
   END GAME
 *************************/
 
-void endGame()
+void end()
 {
   background(200,0,0);
   textSize(40);
   fill(0);
   text("Você Perdeu!", 100, height/2);
+  fill(255);
   textSize(20);
-  text("Pressione a tecla 'r' para voltar ao menu principal.", 100, (height/2)+50);
+  text("Pressione a tecla 'v' para voltar ao menu principal.", 100, (height/2)+50);
   // RESTART GAME
-  if(keyPressed && (key == 'r' || key == 'R')){
+  if(keyPressed && (key == 'v' || key == 'V')){
     SCREEN_GAME = 0;
     playerX = 50;
     playerY = 150;
@@ -249,7 +272,7 @@ void draw()
   if(LIFE == 0){
     LOST = true;
     STATUS_GAME = false;
-    endGame();
+    end();
   }
   
 }
