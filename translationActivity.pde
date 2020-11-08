@@ -109,7 +109,7 @@ void game(){
   image(life_image, 200, 20);
   text(": "+LIFE, 227, 40);
   text("Pontos: "+SCORE, 20, 80);
-  text("Velocidade: "+VELOCITY, 227, 80);
+  text("Velocidade: "+VELOCITY, 200, 80);
   
   // Fundo do jogo
   fill(255,255,255);
@@ -414,15 +414,12 @@ void game(){
     LIFE++;
     life1_status = true;
   }
-  
   if(!life2_status && (playerX+(playerSize/2) >= life2+(100/2)-(25/2) && playerX-(playerSize/2) <= life2+(100/2)+(25/2)) && (playerY+(playerSize/2) >= position2+(100/2)-(25/2) && playerY-(playerSize/2) <= position2+(100/2)+(25/2))){  
     fill(255);
     rect(700+(100/2)-(25/2), position3+(100/2)-(25/2), 25, 25);
     LIFE++;
     life2_status = true;
   }
-  
-  
   if(!life3_status && (playerX+(playerSize/2) >= life3+(100/2)-(25/2) && playerX-(playerSize/2) <= life3+(100/2)+(25/2)) && (playerY+(playerSize/2) >= position3+(100/2)-(25/2) && playerY-(playerSize/2) <= position3+(100/2)+(25/2))){  
     fill(255);
     rect(700+(100/2)-(25/2), position3+(100/2)-(25/2), 25, 25);
@@ -648,9 +645,9 @@ void draw()
     lost();
   }
   
-  if(SCREEN_GAME+SCREEN_TOTAL <= 0){
+  if(SCREEN_GAME+SCREEN_TOTAL+width <= 0){
     STATUS_GAME = false;
-    LOST = true;
+    WIN = true;
     win();
   }
   
