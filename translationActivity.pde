@@ -2,7 +2,10 @@ color R = color(255,0,0);
 color B = color(0,0,255);
 int LIFE = 3;
 float VELOCITY = 2;
-boolean STATUS_GAME = true;
+boolean STATUS_GAME = false;
+boolean WIN = false;
+boolean LOST = false;
+
 
 float SCREEN_GAME = 0;
 
@@ -15,25 +18,21 @@ float obstacle2 = 400;
 float obstacle3 = 600;
 
 float life1 = 700;
+boolean life1_status = false;
 float life2 = 500;
+boolean life2_status = false;
 float life3 = 200;
+boolean life3_status = false;
+
 
 /*************************
   PLAYER
 *************************/
-float playerX = 50;
-float playerY = 150;
+float playerX = 50; //50
+float playerY = 150; //150
 float playerSize = 40;
 float playerVelocity = 2;
 
-
-
-/*************************
-  CLASS OBSTACLE
-*************************/
-
-class Obstacle{
-}
 
 
 /************************
@@ -42,10 +41,7 @@ class Obstacle{
 
 void setup(){
   size(800, 500);
-  background(206,212,219);
   //noStroke();
-  R = color(255,0,0);
-  B = color(0,0,255);
   
 }
 
@@ -55,6 +51,7 @@ void setup(){
 *************************/
 
 void game(){
+  
   PImage life_image = loadImage("imgs/life.png");
   
   fill(0);
@@ -67,14 +64,12 @@ void game(){
   fill(255,255,255);
   rect(0, 100, width, height-200);
   
-  
-  
   // COMMANDS
   if (keyPressed){
     if(playerY >= position1+50 && playerY <= position3+50){
-      if(keyCode==38 && playerY > position1+50){
+      if(keyCode==UP && playerY > position1+50){
           playerY = playerY-10;
-      }else if(keyCode==40 && playerY < position3+50){
+      }else if(keyCode==DOWN && playerY < position3+50){
           playerY = playerY+10;
       }
     }
@@ -85,6 +80,8 @@ void game(){
     }*/
   }
   
+  
+  
   // Conjunto de objectos movendo-se
   SCREEN_GAME = SCREEN_GAME - VELOCITY;
   if(SCREEN_GAME+2000 <= 0){
@@ -94,42 +91,93 @@ void game(){
   fill(255,255,255);
   rect(0, 0, 2000, height-200);
   
+  // OBSTACLES
   fill(0);
   rect(obstacle1, position1, 100, 100);
   rect(obstacle2, position3, 100, 100);
   rect(obstacle3, position2, 100, 100);
   
   // LIFES
-  image(life_image, life1+(100/2)-(25/2), position1+(100/2)-(25/2));
-  image(life_image, life2+(100/2)-(25/2), position2+(100/2)-(25/2));
-  image(life_image, life3+(100/2)-(25/2), position3+(100/2)-(25/2));
+  if(!life1_status){
+    image(life_image, life1+(100/2)-(25/2), position1+(100/2)-(25/2));
+  }
+  if(!life2_status){
+    image(life_image, life2+(100/2)-(25/2), position2+(100/2)-(25/2));
+  }
+  if(!life3_status){
+    image(life_image, life3+(100/2)-(25/2), position3+(100/2)-(25/2));
+  }
+  
   
   // PLAYER
   playerX = playerX + playerVelocity;
   
   if(playerX >= 2000){
     playerX = 0;
+    playerY = 150;
   }
   
   translate(playerX, playerY);
   fill(0,255,0);
   ellipse(0, 0, playerSize, playerSize);
   
+  
+  
   // COLLISIONS
-  if((playerX+(playerSize/2) >= obstacle1 && playerX <= obstacle1+100) && (playerY+(playerSize/2) >= position1 && playerY-(playerSize/2) <= position1+100)){  
-    stop();
+  // with obstacles
+  if((playerX+(playerSize/2) >= obstacle1 && playerX-(playerSize/2) <= obstacle1+100) && (playerY+(playerSize/2) >= position1 && playerY-(playerSize/2) <= position1+100)){  
     fill(255,0,0);
     ellipse(0, 0, playerSize, playerSize);
     LIFE--;
+    //stop();
+    SCREEN_GAME = 0;
+    playerX = 50;
+    playerY = 150;
   }
   
-  if((playerX+(playerSize/2) >= obstacle2 && playerX <= obstacle2+100) && (playerY+(playerSize/2) >= position3 && playerY-(playerSize/2) <= position3+100)){  
-    stop();
+  if((playerX+(playerSize/2) >= obstacle2 && playerX-(playerSize/2) <= obstacle2+100) && (playerY+(playerSize/2) >= position3 && playerY-(playerSize/2) <= position3+100)){  
     fill(255,0,0);
     ellipse(0, 0, playerSize, playerSize);
     LIFE--;
+    //stop();
+    SCREEN_GAME = 0;
+    playerX = 50;
+    playerY = 150;
   }
   
+  if((playerX+(playerSize/2) >= obstacle3 && playerX-(playerSize/2) <= obstacle3+100) && (playerY+(playerSize/2) >= position2 && playerY-(playerSize/2) <= position2+100)){  
+    fill(255,0,0);
+    ellipse(0, 0, playerSize, playerSize);
+    LIFE--;
+    //stop();
+    SCREEN_GAME = 0;
+    playerX = 50;
+    playerY = 150;
+  }
+  
+  
+  // with life
+  if(!life1_status && (playerX+(playerSize/2) >= life1+(100/2)-(25/2) && playerX-(playerSize/2) <= life1+(100/2)+(25/2)) && (playerY+(playerSize/2) >= position1+(100/2)-(25/2) && playerY-(playerSize/2) <= position1+(100/2)+(25/2))){  
+    fill(255);
+    rect(700+(100/2)-(25/2), position3+(100/2)-(25/2), 25, 25);
+    LIFE++;
+    life1_status = true;
+  }
+  
+  if(!life2_status && (playerX+(playerSize/2) >= life2+(100/2)-(25/2) && playerX-(playerSize/2) <= life2+(100/2)+(25/2)) && (playerY+(playerSize/2) >= position2+(100/2)-(25/2) && playerY-(playerSize/2) <= position2+(100/2)+(25/2))){  
+    fill(255);
+    rect(700+(100/2)-(25/2), position3+(100/2)-(25/2), 25, 25);
+    LIFE++;
+    life2_status = true;
+  }
+  
+  
+  if(!life3_status && (playerX+(playerSize/2) >= life3+(100/2)-(25/2) && playerX-(playerSize/2) <= life3+(100/2)+(25/2)) && (playerY+(playerSize/2) >= position3+(100/2)-(25/2) && playerY-(playerSize/2) <= position3+(100/2)+(25/2))){  
+    fill(255);
+    rect(700+(100/2)-(25/2), position3+(100/2)-(25/2), 25, 25);
+    LIFE++;
+    life3_status = true;
+  }
 }
 
 
@@ -157,12 +205,23 @@ void winGame(){
 
 void endGame()
 {
-  background(100, 100, 100);
+  background(200,0,0);
   textSize(40);
   fill(0);
-  text("Fim de Jogo!", width/2, height/2);
+  text("Você Perdeu!", 100, height/2);
   textSize(20);
-  text("Pressione a tecla 'r' para reiniciar o jogo", 200, 400);
+  text("Pressione a tecla 'r' para voltar ao menu principal.", 100, (height/2)+50);
+  // RESTART GAME
+  if(keyPressed && (key == 'r' || key == 'R')){
+    SCREEN_GAME = 0;
+    playerX = 50;
+    playerY = 150;
+    LIFE = 3;
+    life1_status = false;
+    life2_status = false;
+    life3_status = false;
+    LOST = false;
+  }
 }
 
 
@@ -170,14 +229,27 @@ void endGame()
   DRAW
 *************************/
 
-void draw(){
-  game();
+void draw()
+{
+  background(206,212,219);
+  textSize(40);
+  fill(0);
+  text("Jogo das Tropa", 100, height/2);
+  textSize(20);
+  text("Pressione a tecla 's' para iniciar o jogo.", 100, (height/2)+50);
+  
+  if(keyPressed && (key == 's' || key == 'S') && !STATUS_GAME && !LOST){
+    STATUS_GAME = true;
+  }
+  
+  if(STATUS_GAME){
+    game();
+  }
   
   if(LIFE == 0){
+    LOST = true;
+    STATUS_GAME = false;
     endGame();
   }
   
-  if(keyPressed && (key == 'r' || key == 'R')){
-    game();
-  }
 }
