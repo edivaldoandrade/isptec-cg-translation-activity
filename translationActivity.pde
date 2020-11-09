@@ -113,27 +113,7 @@ void game(){
   
   // Fundo do jogo
   fill(255,255,255);
-  rect(0, 100, width, height-200);
-  
-  // COMMANDS
-  if (keyPressed){
-    if(playerY >= position1+50 && playerY <= position3+50){
-      if(keyCode==UP && playerY > position1+50){
-          playerY = playerY-10;
-      }else if(keyCode==DOWN && playerY < position3+50){
-          playerY = playerY+10;
-      }
-    }
-    /*
-    delay(100);
-    if(keyCode==UP && (playerY == position2+50 || playerY == position3+50)){
-        playerY = playerY-100;
-    }else if(keyCode==DOWN && (playerY == position1+50 || playerY == position2+50)){
-        playerY = playerY+100;
-    }
-    */
-  }
-  
+  rect(0, 100, width, height-200);  
   
   
   // Conjunto de objectos movendo-se
@@ -615,6 +595,16 @@ void lost()
     life3_status = false;
     LOST = false;
   }
+}
+
+void keyPressed(){
+    if(playerY >= position1+50 && playerY <= position3+50){
+      if(keyCode==UP && playerY > position1+50){
+          playerY = playerY-100;
+      }else if(keyCode==DOWN && playerY < position3+50){
+          playerY = playerY+100;
+      }
+    }
 }
 
 
