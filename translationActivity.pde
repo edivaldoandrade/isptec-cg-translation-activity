@@ -83,18 +83,17 @@ void game(){
   
   fill(0);
   textSize(25);
-  text("Nível: 1", 20, 40);
-  image(life_image, 200, 20);
-  text(": "+life, 227, 40);
-  text("Pontos: "+score, 20, 80);
-  text("Velocidade: "+velocity, 200, 80);
+  text("Pontos: "+score, 20, 40);
+  text("Velocidade: "+velocity, 20, 80);
+  image(life_image, 250, 20);
+  text(": "+life, 277, 40);
   
   // Fundo do jogo
   fill(255,255,255);
   rect(0, 100, width, height-200);  
   
   // Conjunto de objectos movendo-se da direita para esquerda
-  screen_game = screen_game - velocity;
+  screen_game -= velocity;
   
   translate(screen_game, 100);
   fill(255, 255, 255);
@@ -119,7 +118,7 @@ void game(){
   }
   
   // PLAYER
-  player_x = player_x + player_velocity;
+  player_x += player_velocity;
   
   if(player_x >= screen_total){
     player_velocity = 10;
